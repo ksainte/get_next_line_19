@@ -25,15 +25,27 @@
 #include "get_next_line.h"
 #include <unistd.h>
 
+int ft_n_present(char *left_str, char c)
+{
+    
+}
+
 char *ft_read_to_left_str(int fd, char *left_str)
 {
     char    *buff;
     int     nb_bytes;
 
     nb_bytes_toread = -1;
-    while(!ft_n_present && nb_bytes_toread != 0)
+    while(!ft_n_present(left_str,'\n') && nb_bytes_toread != 0)
     {
-        
+        nb_bytes_toread = read(fd, buff, BUFFER_SIZE);
+        if (nb_bytes_toread == -1)
+        {
+            printf("Read error!\n");
+			return (0);
+        }
+        buff[nb_bytes_toread] = '\0';
+        left_str = ft_strjoin(left_str, buff);
     }
 
 }
