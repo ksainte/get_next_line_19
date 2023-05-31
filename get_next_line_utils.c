@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
 int ft_strlen(char *str)
 {
     size_t i;
@@ -24,15 +26,35 @@ int ft_n_present(char *left_str, char c)
 {
     int i;
 
+    printf("npresent\n");
     i = 0;
+    if (!left_str)
+        printf("left_str is null\n");
     while (left_str[i] != '\0')
     {
         if (left_str[i] == c)
-            return ;
+            return (1);
         i++;
     }
+    printf("ncheck\n");
     return (0);
 }
+
+// static char	*ft_append(char *dest, char const *src)
+// {
+// 	size_t	i;
+//     size_t  j;
+// 	size_t	len;
+
+// 	i = 0;
+// 	while (dest[i] != '\0')
+// 		i++;
+//     j = 0;
+// 	while (src[j])
+// 		dest[i++] = src[j++];
+// 	dest[i] = '\0';
+// 	return (dest);
+// }
 
 static char	*ft_append(char *dest, char const *src)
 {
@@ -40,16 +62,20 @@ static char	*ft_append(char *dest, char const *src)
 	size_t	len;
 
 	i = 0;
-	while (dest[i] != '\0')
+	while (dest[i])
 		i++;
-    j = 0;
+	len = i;
+	i = 0;
 	while (src[i])
-		dest[i++] = src[j++];
-	dest[i] = '\0';
+	{
+		dest[len + i] = src[i];
+		i++;
+	}
+	dest[len + i] = '\0';
 	return (dest);
 }
 
-char	*ft_strjoin(char const *left_str, char const *buff)
+char	*ft_strjoin(char *left_str,char *buff)
 {
 	size_t	len_s2;
 	size_t	len_s1;
@@ -66,6 +92,8 @@ char	*ft_strjoin(char const *left_str, char const *buff)
 	ms = ft_append(ms, left_str);
 	ms = ft_append(ms, buff);
     free(left_str);
+    free(buff);
+    printf("%s",ms);
 	return (ms);
 }
 
@@ -85,6 +113,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 		dst2[i] = src2[i];
 		i++;
 	}
+    free(src2);
 	return (dst2);
 }
 

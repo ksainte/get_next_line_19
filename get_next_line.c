@@ -23,9 +23,7 @@
 *	If an error occurs, or there is nothing more to read, it returns NULL.*/
 
 #include "get_next_line.h"
-#include <unistd.h>
-#include <stdlib.h>
-
+#include <fcntl.h>
 
 char *print_line(char *left_str)
 {
@@ -41,12 +39,12 @@ char *print_line(char *left_str)
         str = (char *)malloc(sizeof(char) * (i + 2));
     if (str == NULL)
         return (NULL);
-    str = '\0';
+    *str = 0;
     str = ft_memcpy(str, left_str, i);
     if (left_str[i] == '\n')
         str[i] = left_str[i];
     str[i] = '\0';
-    free(left_str)
+    free(left_str);
     return (str);
 }
 char *ft_read_to_left_str(int fd, char *left_str)
@@ -57,10 +55,11 @@ char *ft_read_to_left_str(int fd, char *left_str)
     buff = (char*)malloc(sizeof(char) * BUFFER_SIZE + 1);
     if (buff == NULL)
         return (NULL);
+    printf("buffmalloc\n");
     nb_bytes_to_read = -1;
     while(!ft_n_present(left_str,'\n') && nb_bytes_to_read != 0)
     {
-        nb_bytes_toread = read(fd, buff, BUFFER_SIZE);
+        nb_bytes_to_read = read(fd, buff, BUFFER_SIZE);
         if (nb_bytes_to_read == -1)
         {
             printf("Read error!\n");
@@ -99,6 +98,7 @@ char *get_next_line(int fd)
     static char *left_str;
     char    *line;
 
+    printf("fdopened\n");
     if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
     left_str = ft_read_to_left_str(fd, left_str);
@@ -113,6 +113,7 @@ int main()
     char    *line;
     int i;
     
+    printf("fdopen\n");
     fd = open("test.txt", O_RDONLY);
     i = 0;
     while (i < 10)
