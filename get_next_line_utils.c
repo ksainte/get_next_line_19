@@ -26,17 +26,15 @@ int ft_n_present(char *left_str, char c)
 {
     int i;
 
-    printf("npresent\n");
     i = 0;
     if (!left_str)
-        printf("left_str is null\n");
+		return (0);
     while (left_str[i] != '\0')
     {
         if (left_str[i] == c)
             return (1);
         i++;
     }
-    printf("ncheck\n");
     return (0);
 }
 
@@ -92,8 +90,7 @@ char	*ft_strjoin(char *left_str,char *buff)
 	ms = ft_append(ms, left_str);
 	ms = ft_append(ms, buff);
     free(left_str);
-    free(buff);
-    printf("%s",ms);
+    // free(buff);
 	return (ms);
 }
 

@@ -55,7 +55,6 @@ char *ft_read_to_left_str(int fd, char *left_str)
     buff = (char*)malloc(sizeof(char) * BUFFER_SIZE + 1);
     if (buff == NULL)
         return (NULL);
-    printf("buffmalloc\n");
     nb_bytes_to_read = -1;
     while(!ft_n_present(left_str,'\n') && nb_bytes_to_read != 0)
     {
@@ -67,6 +66,8 @@ char *ft_read_to_left_str(int fd, char *left_str)
         }
         buff[nb_bytes_to_read] = '\0';
         left_str = ft_strjoin(left_str, buff);
+        if (!left_str)
+            return (NULL);
     }
     free(buff);
     return (left_str);
@@ -98,7 +99,8 @@ char *get_next_line(int fd)
     static char *left_str;
     char    *line;
 
-    printf("fdopened\n");
+    left_str = malloc(1);
+    left_str[0] = '\0';
     if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
     left_str = ft_read_to_left_str(fd, left_str);
@@ -112,8 +114,7 @@ int main()
     int fd;
     char    *line;
     int i;
-    
-    printf("fdopen\n");
+
     fd = open("test.txt", O_RDONLY);
     i = 0;
     while (i < 10)
