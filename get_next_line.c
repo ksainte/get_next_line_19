@@ -24,74 +24,41 @@
 
 #include "get_next_line.h"
 #include <unistd.h>
+#include <stdlib.h>
 
-int ft_strlen(char *str)
+
+char *print_line(char *left_str)
 {
-    int i;
+    size_t i;
+    char *str;
 
     i = 0;
-    while (str[i])
-    {
+    while (left_str[i] != '\0' && left_str[i] != '\n')
         i++;
-    }
-    return (i);
-}
-
-int ft_n_present(char *left_str, char c)
-{
-    while ( left_str != '\0')
-    {
-        if ( left_str == c)
-            return ;
-        i++;
-    }
-    return (0);
-}
-
-static char	*ft_append(char *left_str, char const *buff)
-{
-	size_t	i;
-	size_t	len;
-
-	i = 0;
-	while (left_str[i])
-		i++;
-	len = i;
-	i = 0;
-	while (buff[i] != '\0')
-	{
-		left_str[len + i] = buff[i];
-		i++;
-	}
-	left_str[len + i] = '\0';
-	return (buff);
-}
-
-char	*ft_strjoin(char const *left_str, char const *buff)
-{
-	size_t	len_s2;
-	size_t	len_s1;
-	char	*ms;
-
-	if (!left_str || !buff)
-		return (NULL);
-	len_s1 = ft_strlen(left_str);
-	len_s2 = ft_strlen(buff);
-	ms = (char *)malloc(sizeof(*ms) * (len_s1 + len_s2 + 1));
-	if (ms == NULL)
-		return (NULL);
-	*ms = 0;
-	ms = ft_append(ms, s1);
-	ms = ft_append(ms, s2);
-	return (ms);
+    if (left_str[i] == '\0')
+        str = (char *)malloc(sizeof(char) * (i + 1));
+    if (left_str[i] == '\n')
+        str = (char *)malloc(sizeof(char) * (i + 2));
+    if (str == NULL)
+        return (NULL);
+    str = '\0';
+    str = ft_memcpy(str, left_str, i);
+    if (left_str[i] == '\n')
+        str[i] = left_str[i];
+    str[i] = '\0';
+    free(left_str)
+    return (str);
 }
 char *ft_read_to_left_str(int fd, char *left_str)
 {
     char    *buff;
     int     nb_bytes_to_read;
 
+    buff = (char*)malloc(sizeof(char) * BUFFER_SIZE + 1);
+    if (buff == NULL)
+        return (NULL);
     nb_bytes_to_read = -1;
-    while(!ft_n_present(left_str,'\n') && nb_bytes_toread != 0)
+    while(!ft_n_present(left_str,'\n') && nb_bytes_to_read != 0)
     {
         nb_bytes_toread = read(fd, buff, BUFFER_SIZE);
         if (nb_bytes_to_read == -1)
@@ -106,7 +73,27 @@ char *ft_read_to_left_str(int fd, char *left_str)
     return (left_str);
 }
 
-char *print_line()
+char *new_left_str(char *left_str)
+{   
+    size_t i;
+    size_t j;
+    char    *str;
+
+    i = 0;
+    while (left_str[i] != '\n')
+        i++;
+    str = (char*)malloc(sizeof(char)*(ft_strlen(left_str) - i + 1));
+    if (str == NULL)
+        return (NULL);
+    i++;
+    j = 0;
+    while(left_str[i] != '\0')
+        str[j++] = left_str[i++];
+    str[j] = '\0';
+    free(left_str);
+    return (str);  
+}
+
 char *get_next_line(int fd)
 {
     static char *left_str;
@@ -116,6 +103,8 @@ char *get_next_line(int fd)
 		return (0);
     left_str = ft_read_to_left_str(fd, left_str);
     line = print_line(left_str);
+    left_str = new_left_str(left_str);
+    return (line);
 }
 
 int main()
@@ -123,7 +112,7 @@ int main()
     int fd;
     char    *line;
     int i;
-
+    
     fd = open("test.txt", O_RDONLY);
     i = 0;
     while (i < 10)
@@ -145,7 +134,11 @@ int main()
 ou 
 
 --------------\n  i
-str------------'\0' str = (char *)malloc(sizeof(char) * (ft_strlen(left_str) - i + 1));
+str------------'\0' 
+
+
+
+str = (char *)malloc(sizeof(char) * (ft_strlen(left_str) - i + 1));
 
 --------------------------------------------'\0' o bytes left 
 
@@ -153,3 +146,8 @@ avant -----------\n ----------'\0' fd
 apres \n new str ------- '\0' fd
 
  */
+
+
+//  a b c d '\0'
+//  0 1 2 3  4
+//  i[4] = '\0'
