@@ -47,6 +47,27 @@ char *print_line(char *left_str)
     free(left_str);
     return (str);
 }
+char *new_left_str(char *left_str)
+{   
+    size_t i;
+    size_t j;
+    char    *str;
+
+    i = 0;
+    while (left_str[i] != '\n')
+        i++;
+    str = (char*)malloc(sizeof(char)*(ft_strlen(left_str) - i + 1));
+    if (str == NULL)
+        return (NULL);
+    i++;
+    j = 0;
+    while(left_str[i] != '\0')
+        str[j++] = left_str[i++];
+    str[j] = '\0';
+    free(left_str);
+    return (str);  
+}
+
 char *ft_read_to_left_str(int fd, char *left_str)
 {
     char    *buff;
@@ -71,27 +92,6 @@ char *ft_read_to_left_str(int fd, char *left_str)
     }
     free(buff);
     return (left_str);
-}
-
-char *new_left_str(char *left_str)
-{   
-    size_t i;
-    size_t j;
-    char    *str;
-
-    i = 0;
-    while (left_str[i] != '\n')
-        i++;
-    str = (char*)malloc(sizeof(char)*(ft_strlen(left_str) - i + 1));
-    if (str == NULL)
-        return (NULL);
-    i++;
-    j = 0;
-    while(left_str[i] != '\0')
-        str[j++] = left_str[i++];
-    str[j] = '\0';
-    free(left_str);
-    return (str);  
 }
 
 char *get_next_line(int fd)

@@ -90,7 +90,7 @@ char	*ft_strjoin(char *left_str,char *buff)
 	ms = ft_append(ms, left_str);
 	ms = ft_append(ms, buff);
     free(left_str);
-    // free(buff);
+    //free(buff);
 	return (ms);
 }
 
