@@ -44,7 +44,7 @@ char *print_line(char *left_str)
     if (left_str[i] == '\n')
         str[i] = left_str[i];
     str[i] = '\0';
-    free(left_str);
+    //free(left_str);
     return (str);
 }
 char *new_left_str(char *left_str)
@@ -64,7 +64,7 @@ char *new_left_str(char *left_str)
     while(left_str[i] != '\0')
         str[j++] = left_str[i++];
     str[j] = '\0';
-    free(left_str);
+    //free(left_str);
     return (str);  
 }
 
@@ -103,9 +103,10 @@ char *get_next_line(int fd)
     left_str[0] = '\0';
     if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-    left_str = ft_read_to_left_str(fd, left_str);
+    left_str = ft_read_to_left_str(fd, left_str); //soit \n soit o bytes left
     line = print_line(left_str);
-    left_str = new_left_str(left_str);
+    if (ft_n_present(left_str,'\n'))
+        left_str = new_left_str(left_str);
     return (line);
 }
 
@@ -137,9 +138,6 @@ ou
 --------------\n  i
 str------------'\0' 
 
-
-
-str = (char *)malloc(sizeof(char) * (ft_strlen(left_str) - i + 1));
 
 --------------------------------------------'\0' o bytes left 
 

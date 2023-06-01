@@ -38,40 +38,40 @@ int ft_n_present(char *left_str, char c)
     return (0);
 }
 
-// static char	*ft_append(char *dest, char const *src)
-// {
-// 	size_t	i;
-//     size_t  j;
-// 	size_t	len;
-
-// 	i = 0;
-// 	while (dest[i] != '\0')
-// 		i++;
-//     j = 0;
-// 	while (src[j])
-// 		dest[i++] = src[j++];
-// 	dest[i] = '\0';
-// 	return (dest);
-// }
-
 static char	*ft_append(char *dest, char const *src)
 {
 	size_t	i;
+    size_t  j;
 	size_t	len;
 
 	i = 0;
-	while (dest[i])
+	while (dest[i] != '\0')
 		i++;
-	len = i;
-	i = 0;
-	while (src[i])
-	{
-		dest[len + i] = src[i];
-		i++;
-	}
-	dest[len + i] = '\0';
+    j = 0;
+	while (src[j])
+		dest[i++] = src[j++];
+	dest[i] = '\0';
 	return (dest);
 }
+
+// static char	*ft_append(char *dest, char const *src)
+// {
+// 	size_t	i;
+// 	size_t	len;
+
+// 	i = 0;
+// 	while (dest[i])
+// 		i++;
+// 	len = i;
+// 	i = 0;
+// 	while (src[i])
+// 	{
+// 		dest[len + i] = src[i];
+// 		i++;
+// 	}
+// 	dest[len + i] = '\0';
+// 	return (dest);
+// }
 
 char	*ft_strjoin(char *left_str,char *buff)
 {
