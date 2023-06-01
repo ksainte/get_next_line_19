@@ -5,14 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-			"name": "debug cube3d Linux",
+			"name": "debug Linux",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceRoot}/cube3d",
+			"program": "${workspaceRoot}/a.out",
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"MIMode": "gdb",
-			"miDebuggerPath": "/usr/bin/gdb",
+			// "miDebuggerPath": "/usr/share/gdb",
 			"setupCommands": 
 			[
 			{

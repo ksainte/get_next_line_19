@@ -116,23 +116,23 @@ char *get_next_line(int fd)
     return (line);
 }
 
-// int main()
-// {
-//     int fd;
-//     char    *line;
-//     int i;
+int main()
+{
+    int fd;
+    char    *line;
+    int i;
 
-//     fd = open("test.txt", O_RDONLY);
-//     i = 0;
-//     while (i < 10)
-//     {
-//         line = get_next_line(fd);
-//         printf("%s",line);
-//         i++;
-//     }
-//     close(fd);
-//     return (0);
-// }
+    fd = open("test.txt", O_RDONLY);
+    i = 0;
+    while (i < 10)
+    {
+        line = get_next_line(fd);
+        printf("%s",line);
+        i++;
+    }
+    close(fd);
+    return (0);
+}
 
 /*
 
