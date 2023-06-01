@@ -28,7 +28,7 @@ char    *new_left_str(char *left_str);
 char    *get_next_line(int fd);
 int ft_strlen(char *str);
 int ft_n_present(char *left_str, char c);
-static char *ft_append(char *dest, char const *src);
+// static char *ft_append(char *dest, char const *src);
 char	*ft_strjoin(char *left_str, char *buff);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 

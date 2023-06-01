@@ -42,7 +42,6 @@ static char	*ft_append(char *dest, char const *src)
 {
 	size_t	i;
     size_t  j;
-	size_t	len;
 
 	i = 0;
 	while (dest[i] != '\0')
@@ -89,7 +88,7 @@ char	*ft_strjoin(char *left_str,char *buff)
 	*ms = 0;
 	ms = ft_append(ms, left_str);
 	ms = ft_append(ms, buff);
-    free(left_str);
+    //free(left_str);
     //free(buff);
 	return (ms);
 }

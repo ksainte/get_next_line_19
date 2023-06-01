@@ -42,8 +42,12 @@ char *print_line(char *left_str)
     *str = 0;
     str = ft_memcpy(str, left_str, i);
     if (left_str[i] == '\n')
+    {
         str[i] = left_str[i];
-    str[i] = '\0';
+        //str[i + 1] = '\0';
+    }
+    else
+        str[i] = '\0';
     //free(left_str);
     return (str);
 }
@@ -96,11 +100,13 @@ char *ft_read_to_left_str(int fd, char *left_str)
 
 char *get_next_line(int fd)
 {
-    static char *left_str;
+    static char *left_str = "";//on the stack
     char    *line;
 
-    left_str = malloc(1);
-    left_str[0] = '\0';
+    // if (!left_str[0])
+    //     left_str = malloc(1);
+    // if (!left_str[0])
+    //     left_str[0] = '\0';
     if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
     left_str = ft_read_to_left_str(fd, left_str); //soit \n soit o bytes left
@@ -110,23 +116,23 @@ char *get_next_line(int fd)
     return (line);
 }
 
-int main()
-{
-    int fd;
-    char    *line;
-    int i;
+// int main()
+// {
+//     int fd;
+//     char    *line;
+//     int i;
 
-    fd = open("test.txt", O_RDONLY);
-    i = 0;
-    while (i < 10)
-    {
-        line = get_next_line(fd);
-        printf("%s",line);
-        i++;
-    }
-    close(fd);
-    return (0);
-}
+//     fd = open("test.txt", O_RDONLY);
+//     i = 0;
+//     while (i < 10)
+//     {
+//         line = get_next_line(fd);
+//         printf("%s",line);
+//         i++;
+//     }
+//     close(fd);
+//     return (0);
+// }
 
 /*
 
